@@ -75,3 +75,13 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name='following',
     )
+
+    class Meta:
+        # ограничение на уникальность
+        # подписки на автора пользователем.
+        constraints = (
+            models.UniqueConstraint(
+                fields=['user', 'following'],
+                name='unique_subscription'
+            ),
+        )
